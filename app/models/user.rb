@@ -10,4 +10,6 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_one :profile
+  has_many :farms
+  has_many :invitations
 end
