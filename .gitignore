@@ -18,3 +18,4 @@
 /coverage/
 /spec/tmp/*
 **.orig
+.idea
