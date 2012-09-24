@@ -1,0 +1,8 @@
+<h1>Profile</h1>
+
+<%= simple_form_for @profile do |f| %>
+  <%= f.input :country, :as => :string %>
+  <%= f.input :dob, :start_year => Date.today.year - 90, :end_year => Date.today.year - 12 %>
+  <%= f.button :submit %>
+<% end %>
+

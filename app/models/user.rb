@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :farms
   has_many :invitations
+
+  def is_complited_registration?
+    profile && farms.any? && invitations.any?
+  end
 end

@@ -1,0 +1,6 @@
+<h1>New invitation</h1>
+
+<%= simple_form_for @invitation do |f| %>
+  <%= f.input :invitee_id, as: :select, collection: User.all.collect {|u|[u.email, u.id]}, include_blank: "Select friend" %>
+  <%= f.button :submit %>
+<% end %>
