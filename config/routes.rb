@@ -7,6 +7,6 @@ KodoTest::Application.routes.draw do
   resources :invitations
   resources :profiles
 
-  root to: "dashboard#index"
+  root to: "welcome#index"
   
 end

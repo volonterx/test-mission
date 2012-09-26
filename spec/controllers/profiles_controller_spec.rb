@@ -38,7 +38,7 @@ describe ProfilesController, "POST #create" do
     assigns(:profile).user.should eq(@user)
     assigns(:profile).should_not be_new_record
     flash[:notice].should eq "Profile created"
-    response.should redirect_to(dashboard_index_path)
+    response.should redirect_to(welcome_index_path)
   end
 
   it "should not save invalid profile for current user and render action :new" do

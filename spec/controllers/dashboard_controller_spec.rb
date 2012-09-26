@@ -8,7 +8,7 @@ describe DashboardController do
   end
 
   describe "GET #index" do
-    it "should render index if user login in after complite registration" do
+    it "should render index after user login" do
       get 'index'
       response.should render_template :index
     end

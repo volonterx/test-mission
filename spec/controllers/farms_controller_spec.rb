@@ -37,7 +37,7 @@ describe FarmsController, "POST #create" do
     assigns(:farm).user.should eq(@user)
     assigns(:farm).should_not be_new_record
     flash[:notice].should eq "Farm created"
-    response.should redirect_to(dashboard_index_path)
+    response.should redirect_to(welcome_index_path)
   end
 
   it "should not save invalid farm for current user and render action :new" do

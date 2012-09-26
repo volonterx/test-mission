@@ -8,12 +8,12 @@ describe ApplicationController do
       sign_in @user
     end
     
-    it "redirects to the /welcome page if user does not complite registration" do
+    it "redirects to the /welcome page if user does not fulfilled welcome conditions" do
       controller.current_user.stub!(:show_welcome_page?).and_return(false)
       controller.after_sign_in_path_for(controller.current_user).should eq(welcome_index_path)
     end
 
-    it "redirects to the /dashboard page if user complited registration" do
+    it "redirects to the /dashboard page if user fulfilled welcome conditions" do
       controller.current_user.stub!(:show_welcome_page?).and_return(true)
       controller.after_sign_in_path_for(controller.current_user).should eq(dashboard_index_path)
     end

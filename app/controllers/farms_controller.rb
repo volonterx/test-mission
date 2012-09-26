@@ -6,7 +6,7 @@ class FarmsController < WelcomeController
   def create
     @farm = current_user.farms.build(params[:farm])
     if @farm.save
-      redirect_to dashboard_index_path, notice: "Farm created"
+      redirect_to welcome_index_path, notice: "Farm created"
     else
       render action: :new
     end

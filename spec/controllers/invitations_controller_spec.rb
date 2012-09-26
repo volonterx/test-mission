@@ -37,7 +37,7 @@ describe InvitationsController, "POST #create" do
     assigns(:invitation).user.should eq(@user)
     assigns(:invitation).should_not be_new_record
     flash[:notice].should eq "Invitation created"
-    response.should redirect_to(dashboard_index_path)
+    response.should redirect_to(welcome_index_path)
   end
 
   it "should not save invalid invitation for current user and render action :new" do

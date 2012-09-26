@@ -7,7 +7,7 @@ class InvitationsController < WelcomeController
   def create
     @invitation = current_user.invitations.build(params[:invitation])
     if @invitation.save
-      redirect_to dashboard_index_path, notice: "Invitation created"
+      redirect_to welcome_index_path, notice: "Invitation created"
     else
       render action: :new
     end
