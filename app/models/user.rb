@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :farms
   has_many :invitations
 
-  def is_complited_registration?
+  def show_welcome_page?
     profile && farms.any? && invitations.any?
   end
 end
