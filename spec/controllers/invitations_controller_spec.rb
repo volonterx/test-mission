@@ -1,43 +1,28 @@
 require 'spec_helper'
 
-describe InvitationsController, "GET #new" do
+describe InvitationsController do
 
-  before(:each) do
-    @user = FactoryGirl.create :user 
-    sign_in @user
-    get 'new'
+  let(:user) { create :user } 
+  before { sign_in user }
+
+  describe "#new" do 
+    before { get :new }
+    it { assigns :invitation } 
+    it { should render_template :new }
   end
 
-  it "should create new invitation for current user" do
-    assigns(:invitation).should be_new_record
-    assigns(:invitation).user.should eq(@user)
+  describe "#create with valid invitation" do
+    before { post :create, invitation: FactoryGirl.attributes_for(:invitation) }
+    it { assigns :invitation }
+    it { should set_the_flash.to("Invitation created") } 
+    it { should redirect_to(welcome_index_path) }
   end
 
-  it "should render template :new" do
-    response.should render_template :new
+  describe "#create with invalid invitation" do
+    before { post :create, invitation: FactoryGirl.attributes_for(:invitation, invitee_id: "") }
+    it { assigns :invitation }
+    it { should_not set_the_flash } 
+    it { should render_template :new }
   end
 
-end
-
-describe InvitationsController, "POST #create" do
-
-  before(:each) do
-    @user = FactoryGirl.create :user 
-    sign_in @user
-  end
-
-  it "should save new valid invitation for current user and redirect to dashboard page with notice" do
-    post 'create', invitation: FactoryGirl.attributes_for(:invitation)
-    assigns(:invitation).user.should eq(@user)
-    assigns(:invitation).should_not be_new_record
-    flash[:notice].should eq "Invitation created"
-    response.should redirect_to(welcome_index_path)
-  end
-
-  it "should not save invalid invitation for current user and render action :new" do
-    post 'create', invitation: FactoryGirl.attributes_for(:invitation, invitee_id: "")
-    assigns(:invitation).should be_new_record
-    flash[:notice].should be_nil
-    response.should render_template :new
-  end
 end

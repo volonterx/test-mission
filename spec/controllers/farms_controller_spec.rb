@@ -1,43 +1,28 @@
 require 'spec_helper'
 
-describe FarmsController, "GET #new" do
+describe FarmsController do
 
-  before(:each) do
-    @user = FactoryGirl.create :user 
-    sign_in @user
-    get 'new'
+  let(:user) { create :user } 
+  before { sign_in user }
+
+  describe "#new" do 
+    before { get :new }
+    it { assigns :farm } 
+    it { should render_template :new }
   end
 
-  it "should create new farm for current user" do
-    assigns(:farm).should be_new_record
-    assigns(:farm).user.should eq(@user)
+  describe "#create with valid farm" do
+    before { post :create, farm: FactoryGirl.attributes_for(:farm) }
+    it { assigns :farm }
+    it { should set_the_flash.to("Farm created") } 
+    it { should redirect_to(welcome_index_path) }
   end
 
-  it "should render template :new" do
-    response.should render_template :new
+  describe "#create with invalid farm" do
+    before { post :create, farm: FactoryGirl.attributes_for(:farm, title: "") }
+    it { assigns :farm }
+    it { should_not set_the_flash } 
+    it { should render_template :new }
   end
 
-end
-
-describe FarmsController, "POST #create" do
-
-  before(:each) do
-    @user = FactoryGirl.create :user 
-    sign_in @user
-  end
-
-  it "should save new valid farm for current user and redirect to dashboard page with notice" do
-    post 'create', farm: FactoryGirl.attributes_for(:farm)
-    assigns(:farm).user.should eq(@user)
-    assigns(:farm).should_not be_new_record
-    flash[:notice].should eq "Farm created"
-    response.should redirect_to(welcome_index_path)
-  end
-
-  it "should not save invalid farm for current user and render action :new" do
-    post 'create', farm: FactoryGirl.attributes_for(:farm, title: "")
-    assigns(:farm).should be_new_record
-    flash[:notice].should be_nil
-    response.should render_template :new
-  end
 end

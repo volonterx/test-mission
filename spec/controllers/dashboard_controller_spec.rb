@@ -7,7 +7,7 @@ describe DashboardController do
     sign_in @user
   end
 
-  describe "GET #index" do
+  describe "#index" do
     it "should render index after user login" do
       get 'index'
       response.should render_template :index

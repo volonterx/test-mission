@@ -14,10 +14,7 @@ describe 'New invitation page' do
     before(:each) do
       @user = FactoryGirl.create :user 
       @invitee_user = FactoryGirl.create :user, email: "invitee_user@example.com"
-      visit '/users/sign_in'
-      fill_in "Email", :with => @user.email
-      fill_in "Password", :with => @user.password
-      click_button "Sign in"
+      login_as(@user)
       visit '/invitations/new'
     end
 

@@ -11,6 +11,8 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller 
+  config.include Warden::Test::Helpers
+  Warden.test_mode!
   
   # ## Mock Framework
   #
@@ -34,5 +36,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   config.use_transactional_fixtures = true
+
+  config.before(:each) do
+    Warden.test_reset! 
+  end
 
 end

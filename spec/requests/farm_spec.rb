@@ -13,10 +13,7 @@ describe 'New farm page' do
   context 'when user authorized' do
     before(:each) do
       @user = FactoryGirl.create :user 
-      visit '/users/sign_in'
-      fill_in "Email", :with => @user.email
-      fill_in "Password", :with => @user.password
-      click_button "Sign in"
+      login_as(@user)
       visit '/farms/new'
     end
 
