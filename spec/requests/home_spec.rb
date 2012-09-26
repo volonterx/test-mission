@@ -11,7 +11,7 @@ describe 'Home' do
     page.should have_content 'Sign in'
   end
 
-  specify 'should show welcome page if user authorized and does not complite registration' do
+  specify 'should show welcome page if user authorized and does not fulfilled welcome conditions' do
     visit '/'
     fill_in "Email", :with => @new_user.email
     fill_in "Password", :with => @new_user.password
@@ -19,7 +19,7 @@ describe 'Home' do
     page.should have_link 'Welcome'
   end
 
-  specify 'should show dashboard page if user authorized and complite registration' do
+  specify 'should show dashboard page if user authorized and fulfilled welcome conditions' do
     @user = FactoryGirl.create :user, email: "user@example.com" 
     FactoryGirl.create :farm, user: @user 
     FactoryGirl.create :invitation, user: @user 
