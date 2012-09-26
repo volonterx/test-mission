@@ -1,11 +1,5 @@
 require 'spec_helper'
 
-describe ProfilesController do
-  it "should inherit from WelcomeController" do
-    controller.class.superclass.to_s.should eq("WelcomeController")
-  end
-end
-
 describe ProfilesController, "GET #new" do
 
   before(:each) do

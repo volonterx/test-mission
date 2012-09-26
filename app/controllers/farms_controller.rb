@@ -1,4 +1,6 @@
-class FarmsController < WelcomeController
+class FarmsController < ApplicationController
+  before_filter :authenticate_user!
+
   def new
     @farm = current_user.farms.build
   end

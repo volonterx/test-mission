@@ -1,11 +1,5 @@
 require 'spec_helper'
 
-describe InvitationsController do
-  it "should inherit from WelcomeController" do
-    controller.class.superclass.to_s.should eq("WelcomeController")
-  end
-end
-
 describe InvitationsController, "GET #new" do
 
   before(:each) do

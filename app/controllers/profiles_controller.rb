@@ -1,4 +1,5 @@
-class ProfilesController < WelcomeController
+class ProfilesController < ApplicationController
+  before_filter :authenticate_user!
 
   def new
     @profile = current_user.build_profile

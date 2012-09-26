@@ -1,11 +1,5 @@
 require 'spec_helper'
 
-describe FarmsController do
-  it "should inherit from WelcomeController" do
-    controller.class.superclass.to_s.should eq("WelcomeController")
-  end
-end
-
 describe FarmsController, "GET #new" do
 
   before(:each) do
